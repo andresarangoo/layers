@@ -1,10 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Product', {
-
+ 
         product_id:{
             type: DataTypes.INTEGER(9),
             allowNull: false,
-            primaryKey: true,
+            primaryKey: true, 
             autoIncrement: true
         },
 
