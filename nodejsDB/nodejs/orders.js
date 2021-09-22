@@ -11,6 +11,11 @@ module.exports = (sequelize, DataTypes) => {
         product_ID:{
             type: DataTypes.INTEGER(9),
             allowNull: false,
+            onDelete: 'CASCADE',
+            references: {
+                model: 'Product',
+                key: 'product_id'
+            }
         },
         
         user_name: {
@@ -27,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     },{
-        tableName: 'Product',
+        tableName: 'Order',
         timestamps: false
     });
 };
