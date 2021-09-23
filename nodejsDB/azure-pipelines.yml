@@ -43,5 +43,5 @@ jobs:
       scriptType: "inline"
       inlineScript: |
           # aws lambda publish-layer-version --layer-name LayerProductsConnection --description "Layer for connection with DB" --content S3Bucket=private-bucket-modules-products,S3Key=nodejsDB/nodejs.zip --compatible-runtimes nodejs12.x;
-          layers=$(aws lambda list-layer-versions --layer-name layer-products-connection | jq .LayerVersions[0].LayerVersionArn);
-          aws lambda update-function-configuration --function-name ProductsOrdersLambdaUPDATE --layers $(echo $layers | sed ''s:^.\(.*\).$:\1:'');
+          layer=$(aws lambda list-layer-versions --layer-name layer-products-connection | jq .LayerVersions[0].LayerVersionArn);
+          aws lambda update-function-configuration --function-name ProductsOrdersLambdaUPDATE --layers $(echo $layer | sed ''s:^.\(.*\).$:\1:'');
