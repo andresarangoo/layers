@@ -42,6 +42,6 @@ jobs:
       regionName: "us-east-1"
       scriptType: "inline"
       inlineScript: |
-          # aws lambda publish-layer-version --layer-name LayerProductsConnection --description "Layer for connection with DB" --content S3Bucket=private-bucket-modules-products,S3Key=nodejsDB/nodejs.zip --compatible-runtimes nodejs12.x
-          layers=aws lambda list-layer-versions --layer-name LayerProductsConnection | jq .LayerVersions[0].LayerVersionArn
-          # aws lambda update-function-configuration --function-name ProductsOrdersLambdaUPDATE --layers $(echo $layers | jq .LayerVersions[0].LayerVersionArn | sed ''s:^.\(.*\).$:\1:'')
+          # aws lambda publish-layer-version --layer-name LayerProductsConnection --description "Layer for connection with DB" --content S3Bucket=private-bucket-modules-products,S3Key=nodejsDB/nodejs.zip --compatible-runtimes nodejs12.x;
+          layers=$(aws lambda list-layer-versions --layer-name LayerProductsConnection | jq .LayerVersions[0].LayerVersionArn);
+          # aws lambda update-function-configuration --function-name ProductsOrdersLambdaUPDATE --layers $(echo $layers | jq .LayerVersions[0].LayerVersionArn | sed ''s:^.\(.*\).$:\1:'');
