@@ -8,7 +8,10 @@ let info;
 secretsmanager.getSecretValue({ SecretId: 'ProductsSecretManager' }, function (err, data) {
     if (err) console.log(err, err.stack); 
     else {
+        console.log(data);
+        console.log(data.SecretString);
         info = JSON.parse(data.SecretString);
+        console.log(info)
     }
 });
 
