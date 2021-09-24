@@ -3,19 +3,17 @@ const {Sequelize} = require('sequelize');
 const AWS = require('aws-sdk');
 const secretsmanager = new AWS.SecretsManager();
 
-let info;
+let getSecretAsync = async () => {
+    return new Promise((resolve, reject) => {
+        let client = new AWS.SecretsManager({ region: region });
+        client.getSecretValue({ SecretId: secretName }, function (err, data) {
+            resolve(data)
+        });
+    });
+}
 
-secretsmanager.getSecretValue({ SecretId: 'ProductsSecretManager' }, function (err, data) {
-    if (err) console.log(err, err.stack); 
-    else {
-        console.log(data);
-        console.log(data.SecretString);
-        info = JSON.parse(data.SecretString);
-        console.log(info)
-    }
-});
-
-
+const data = await getSecretAsync();
+const info = JSON.parse(data.SecretsString)
 const host = info.host;
 const user = info.password;
 const password = info.username;
