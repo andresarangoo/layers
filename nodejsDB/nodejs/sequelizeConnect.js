@@ -1,24 +1,21 @@
 'use strict';
-const {Sequelize} = require('sequelize');
+const { Sequelize } = require('sequelize');
+const credentials = require('./credentials');
 
-const host = process.env.PRODUCTS_HOST;
-const user = process.env.PRODUCTS_USER;
-const password = process.env.PRODUCTS_PASSWORD;
-const port = process.env.PRODUCTS_PORT;
-const database = process.env.PRODUCTS_DB;
-const dialect = process.env.PRODUCTS_DIALECT;
+module.exports.DBase = async () => {
+    const { host, username, password, port, database, dialect } = await credentials.loadCredentials();
+    const sequelize = new Sequelize(database, username, password, {
+        host,
+        port,
+        dialect
+    });
 
-const sequelize = new Sequelize (database, user, password, {
-    host,
-    port,
-    dialect
-});
+    sequelize.sync({ alter: true }).then(() => { console.log("listo") }).catch((error) => { console.error("Esto es el error", error) });
 
-sequelize.sync({alter: true}).then(()=>{console.log("listo")}).catch((error) =>{console.error("Esto es el error",error)});
+    const db = {
+        sequelize : sequelize,
+        Sequelize : Sequelize
+    };
 
-const db = {};
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
-
-module.exports = db;
+    return db;
+};
