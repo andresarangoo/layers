@@ -45,3 +45,10 @@ jobs:
           # aws lambda publish-layer-version --layer-name LayerProductsConnection --description "Layer for connection with DB" --content S3Bucket=private-bucket-modules-products,S3Key=nodejsDB/nodejs.zip --compatible-runtimes nodejs12.x;
           layer=$(aws lambda list-layer-versions --layer-name LayerProductsConnection | jq .LayerVersions[0].LayerVersionArn);
           aws lambda update-function-configuration --function-name ProductsOrdersLambdaUPDATE --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsOrdersLambdaPOST --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsOrdersLambdaGETALL --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsOrdersLambdaDELETE --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsLambdaUPDATE --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsLambdaPOST --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsLambdaGETALL --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
+          aws lambda update-function-configuration --function-name ProductsLambdaDELETE --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
