@@ -1,5 +1,6 @@
 'use strict';
 const { Sequelize } = require('sequelize');
+const AWS = require('aws-sdk');
 const secretsmanager = new AWS.SecretsManager();
 
 const { host, user, password, port, database, dialect };
