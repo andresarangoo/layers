@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const AWS = require('aws-sdk');
 const secretsmanager = new AWS.SecretsManager();
 
-const { host, user, password, port, database, dialect };
+let { host, user, password, port, database, dialect };
 
 secretsmanager.getSecretValue({ SecretId: 'ProductsSecretManager' }, function (err, data) {
     if (err) console.log(err, err.stack); 
