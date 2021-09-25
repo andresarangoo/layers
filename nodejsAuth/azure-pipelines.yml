@@ -42,7 +42,7 @@ jobs:
       regionName: "us-east-1"
       scriptType: "inline"
       inlineScript: |
-          aws lambda publish-layer-version --layer-name ProductsLayerAuthorizer --description "Layer for connection with DB" --content S3Bucket=private-bucket-modules-products,S3Key=nodejsDB/nodejs.zip --compatible-runtimes nodejs12.x;
+          aws lambda publish-layer-version --layer-name ProductsLayerAuthorizer --description "Layer for Authorizer" --content S3Bucket=private-bucket-modules-products,S3Key=nodejsAuth/nodejs.zip --compatible-runtimes nodejs12.x;
           layer=$(aws lambda list-layer-versions --layer-name ProductsLayerAuthorizer | jq .LayerVersions[0].LayerVersionArn);
           aws lambda update-function-configuration --function-name LambdaAuthorizerUserProducts --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
           aws lambda update-function-configuration --function-name LambdaAuthorizerAdminProducts --layers $(echo $layer | sed 's:^.\(.*\).$:\1:');
