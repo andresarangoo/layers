@@ -9,12 +9,11 @@ module.exports.DBase = async () => {
     const sequelize = new Sequelize(database, username, password, {
         host,
         port,
-        dialect
+        dialect,
+        logging: false
     });
 
     sequelize.sync({ alter: true }).then(() => { console.log("listo") }).catch((error) => { console.error("Esto es el error", error) });
-    Order.sync({ alter: true }).then(() => { console.log("listo") }).catch((error) => { console.error("Esto es el error", error) });
-    Product.sync({ alter: true }).then(() => { console.log("listo") }).catch((error) => { console.error("Esto es el error", error) });
 
     const db = {
         sequelize : sequelize,
