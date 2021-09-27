@@ -1,6 +1,8 @@
 'use strict';
 const { Sequelize } = require('sequelize');
 const credentials = require('./credentials');
+const Order = require('./orders');
+const Product = require('./products');
 
 module.exports.DBase = async () => {
     const { host, username, password, port, database, dialect } = await credentials.loadCredentials();
@@ -11,6 +13,8 @@ module.exports.DBase = async () => {
     });
 
     sequelize.sync({ alter: true }).then(() => { console.log("listo") }).catch((error) => { console.error("Esto es el error", error) });
+    Order.sync();
+    Product.sync();
 
     const db = {
         sequelize : sequelize,
