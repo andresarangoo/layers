@@ -40,6 +40,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(50),
             allowNull: true,
             defaultValue: "test"
+        },
+        order_testtest: {
+            type: DataTypes.STRING(50),
+            allowNull: true,
+            defaultValue: "test"
         }
     },{
         tableName: 'Order',
