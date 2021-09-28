@@ -27,24 +27,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER(9),
             allowNull: false,
         },
+
         product_amount: {
             type: DataTypes.INTEGER(9),
             allowNull: false,
         },
+        
         order_status: {
             type: DataTypes.STRING(50),
             allowNull: false,
             defaultValue: "En proceso"
-        },
-        order_test: {
-            type: DataTypes.STRING(50),
-            allowNull: true,
-            defaultValue: "test"
-        },
-        order_testtest: {
-            type: DataTypes.STRING(50),
-            allowNull: true,
-            defaultValue: "test"
         }
     },{
         tableName: 'Order',

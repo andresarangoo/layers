@@ -9,13 +9,10 @@ module.exports.DBase = async () => {
         port,
         dialect
     });
-
     sequelize.sync({alter:true}).then(() => { console.log("listo") }).catch((error) => { console.error("Esto es el error", error) });
-
     const db = {
         sequelize : sequelize,
         Sequelize : Sequelize
     };
-
     return db;
 };
